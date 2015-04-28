@@ -1,0 +1,29 @@
+/* app css stylesheet */
+
+body {
+  padding-top: 20px;
+}
+
+.main {
+	margin: 0 auto;
+	width:400px;
+}
+
+h1 {
+	text-align: center;
+	color: red;
+}
+
+.input-block input {
+	width: 100%;
+}
+
+.done {
+	text-decoration: line-through;
+	color: #ccc;
+}
+
+ul {
+	list-style:none;
+}
+
