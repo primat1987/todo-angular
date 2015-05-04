@@ -16,16 +16,24 @@
           <div class="input-block">
             <h1>header</h1>
             <form name="frm" ng-submit="addToDo()">
-              <input type="text" ng-model="newtodo" id="new-todo" placeholder="what to do?" />
+              <input type="text" ng-model="newtodo" placeholder="what to do?" autofocus />
               <!-- <button ng-disabled="frm.$invalid">Go</button> -->
             </form>
             
           </div>
           <ul>
-            <li ng-repeat="todo in todos">
-              <input type="checkbox" ng-model="todo.done" /><span ng-class="{'done':todo.done}">{{todo.title}}</span>
+            <li ng-repeat="todo in todos" ng-class="{editing: todo == editedTodo}">
+              <div class="view">
+                <input type="checkbox" ng-model="todo.done" />
+                <span ng-dblclick="editToDo(todo)" ng-class="{'done':todo.done}">{{todo.title}}</span>
+                <button ng-click="removeToDo(todo)">x</button>
+              </div>
+              <form ng-submit="saveEdited(todo, 'submit')">
+                <input type="text" class="edit" ng-model="todo.title">
+              </form>
             </li>
           </ul>
+          <p>Task remaining: {{remainingCount}}</p>
           <button ng-click="clearCompleted()">Clear completed</button>
         </div>
     </div>

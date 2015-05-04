@@ -27,3 +27,24 @@ ul {
 	list-style:none;
 }
 
+/*.edit {
+	display: none;
+}
+
+.editing span {
+	border: 1px solid red;
+}*/
+
+
+.editing .view {
+	display: none;
+}
+
+.editing .edit {
+	display: block;
+}
+
+.edit {
+	border: 1px solid red;
+	display: none;
+}
