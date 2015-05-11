@@ -2,14 +2,52 @@
 
 /* Controllers */
 
-var phonecatApp = angular.module('todoApp', []);
+var phonecatApp = angular.module('todoApp', ['ngRoute']);
 
-phonecatApp.controller('todoController', ['$scope', '$filter', function($scope, $filter) {
+phonecatApp.config(['$routeProvider', '$locationProvider',function($routeProvider, $locationProvider) {
+  
+  // $locationProvider.html5Mode(true);
+  // $locationProvider.hashPrefix('!');
+
+  var routeConfig = {
+    controller: 'todoController',
+    //templateUrl: 'todo-index.html'
+    templateUrl:'view/template.html'
+  };
+
+  $routeProvider
+      .when('/', routeConfig)
+      .when('/:status', routeConfig)
+      .otherwise({
+        redirectTo: '/'
+      });
+
+
+  
+}]);
+
+phonecatApp.controller('todoController', ['$scope', '$filter', '$routeParams', function($scope, $filter, $routeParams) {
   $scope.todos = [
       {
         'title': 'Build a to do app',
         'done':true
+      },
+      {
+        'title': 'active',
+        'done': false
+      },
+      {
+        'title': 'completed',
+        'done': true
       }];
+
+    $scope.$on('$routeChangeSuccess', function () {
+      var status = $scope.status = $routeParams.status || '';
+      console.log("routeParams = " + $routeParams.status);
+
+      var sF = $scope.statusFilter = (status === 'active') ? {done: false} : (status === 'completed') ? {done: true} : '';
+      console.log("statusFilter = " + sF);
+    });
 
   $scope.$watch('todos', function (newValue, oldValue) {
       console.log(oldValue[oldValue.length-1]);

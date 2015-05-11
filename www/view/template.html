@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="main">
+          <div class="input-block">
+            <h1>header</h1>
+            <form name="frm" ng-submit="addToDo()">
+              <input type="text" ng-model="newtodo" placeholder="what to do?" autofocus />
+              <!-- <button ng-disabled="frm.$invalid">Go</button> -->
+            </form>
+            
+          </div>
+          <ul>
+
+            <li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{editing: todo == editedTodo}">
+              <div class="view">
+                <input type="checkbox" ng-model="todo.done" />
+                <span ng-dblclick="editToDo(todo)" ng-class="{'done':todo.done}">{{todo.title}}</span>
+                <button ng-click="removeToDo(todo)">x</button>
+              </div>
+              <form ng-submit="saveEdited(todo, 'submit')">
+                <input type="text" class="edit" ng-model="todo.title">
+              </form>
+            </li>
+          </ul>
+          <footer>
+            <p>Task remaining: <span ng-bind="remainingCount"></span></p>
+            <span><a ng-class="{selected: status == ''}" href="#/">All</a></span>
+            <span><a ng-class="{selected: status == 'active'}" href="#/active">Active</a></span>
+            <span><a ng-class="{selected: status == 'completed'}" href="#/completed">Completed</a></span>
+            <button ng-click="clearCompleted()">Clear completed</button>
+          </footer>
+        </div>
+    </div>
+  </div>

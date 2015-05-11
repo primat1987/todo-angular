@@ -1,43 +1,20 @@
 <!doctype html>
 <html lang="en" ng-app="todoApp">
 <head>
+  <!-- <base href="/"> -->
   <meta charset="utf-8">
   <title>Google Phone Gallery</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/app.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-  <script src="js/controllers.js"></script>
+
 </head>
 <body ng-controller="todoController">
-
-  <div class="container">
-    <div class="row">
-        <div class="main">
-          <div class="input-block">
-            <h1>header</h1>
-            <form name="frm" ng-submit="addToDo()">
-              <input type="text" ng-model="newtodo" placeholder="what to do?" autofocus />
-              <!-- <button ng-disabled="frm.$invalid">Go</button> -->
-            </form>
-            
-          </div>
-          <ul>
-            <li ng-repeat="todo in todos" ng-class="{editing: todo == editedTodo}">
-              <div class="view">
-                <input type="checkbox" ng-model="todo.done" />
-                <span ng-dblclick="editToDo(todo)" ng-class="{'done':todo.done}">{{todo.title}}</span>
-                <button ng-click="removeToDo(todo)">x</button>
-              </div>
-              <form ng-submit="saveEdited(todo, 'submit')">
-                <input type="text" class="edit" ng-model="todo.title">
-              </form>
-            </li>
-          </ul>
-          <p>Task remaining: {{remainingCount}}</p>
-          <button ng-click="clearCompleted()">Clear completed</button>
-        </div>
-    </div>
-  </div>
-
+  <ng-view></ng-view>
+  
+  <!-- <script type="text/ng-template" id="todo-index.html"></script> -->
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+  <script src="js/controllers.js"></script>
 </body>
 </html>
